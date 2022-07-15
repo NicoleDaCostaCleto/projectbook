@@ -144,7 +144,7 @@ class AdminBookController extends AbstractController
         $search = $request->query->get('search');
 
         // je vais créer une méthode dans BookRepository (searchByWord dans ce cas)
-        // qui trouve un livre en fonction d'un mot dans son titre ou sa description
+        // qui trouve un livre en fonction d'un mot dans son titre
         $books = $bookRepository->searchByWord($search);
 
         // je renvoie un fichier twig en lui passant les livres trouvé

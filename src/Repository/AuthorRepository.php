@@ -39,6 +39,26 @@ class AuthorRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchByWord($search)
+    {
+
+        // j'instancie un query builder afin de faire des requetes SQL en php
+        $qb = $this->createQueryBuilder('author');
+
+        // je fais une requete select sur ma table book
+        $query = $qb->select('author')
+            // je récupère les livres dont le titre correspond à la recherche"
+            ->where('author.lastName LIKE :search')
+            // je défini la valeur de la recherche, il peut contenir des caractères avant et après
+            // setParametre pour sécuriser via Doctrine Symfony (éviter injections SQL ++)
+            ->setParameter('search', '%' . $search . '%')
+            // je récupère la requête
+            ->getQuery();
+
+        // je l'execute en bdd !
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Author[] Returns an array of Author objects
 //     */
