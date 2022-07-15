@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <article>
+        <h2>{{ author.lastName }}</h2>
+        {% for book in author.books %}
+            <p>{{ book.title }}</p>
+        {% endfor %}
+    </article>
+{% endblock %}

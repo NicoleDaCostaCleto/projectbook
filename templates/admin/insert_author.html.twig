@@ -1,0 +1,35 @@
+
+{%  extends 'base.html.twig' %}
+
+{% block title %}
+   Nouveau Author
+{% endblock %}
+
+{% block main %}
+   <div class="container">
+      <div class="row">
+         <div class="col-12">
+            {{ form_start(form) }}
+            {{ form_label(form.firstName, 'First Name', {'label_attr': {'class': 'form-author-firstName-label'}}) }}
+            {{ form_widget(form.firstName, {'attr': {'class': 'form-author-firstName-widget form-control'}}) }}
+            {{ form_errors(form.firstName) }}
+            <br>
+            {{ form_label(form.lastName, 'Last Name', {'label_attr': {'class': 'form-author-lastName-label'}}) }}
+            {{ form_widget(form.lastName, {'attr': {'class': 'form-author-lastName-widget form-control'}}) }}
+            {{ form_errors(form.lastName) }}
+            <br>
+            {{ form_label(form.birthDate, 'Ne(é) le', {'label_attr': {'class': 'form-author-birthDate-label'}}) }}
+            {{ form_widget(form.birthDate, {'attr': {'class': 'form-author-birthDate-widget form-control'}}) }}
+            {{ form_errors(form.birthDate) }}
+            <br>
+            {{ form_label(form.deathDate, 'Mort(e) le', {'label_attr': {'class': 'form-author-deathDate-label'}}) }}
+            {{ form_widget(form.deathDate, {'attr': {'class': 'form-author-deathDate-widget form-control'}}) }}
+            {{ form_errors(form.deathDate) }}
+            <br>
+
+            {{ form_widget(form.submit, {'attr': {'class': 'form-author-submit-widget btn bg-success'}}) }}
+            {{ form_end(form) }}
+         </div>
+      </div>
+   </div>
+{% endblock %}

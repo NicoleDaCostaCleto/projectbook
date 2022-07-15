@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+
+<section class="authors">
+    {% for author in authors %}
+        <article class="author">
+            <h2>{{author.lastName}}</h2>
+            <a class="btn" href="{{path('admin_show_author', {'id':author.id}) }}">Books</a><br>
+            <a class="btn" href="{{ path('admin_insert_author') }}">Ajouter un Author</a><br>
+            <a class="btn" href="{{ path('admin_delete_author', {'id' : author.id}) }}">Supprimer un Author</a><br>
+            <a class="btn" href="{{ path('admin_update_author', {'id' : author.id}) }}">Modifier un Author</a>
+        </article>
+    {% endfor %}
+
+
+</section>
+{% endblock %}

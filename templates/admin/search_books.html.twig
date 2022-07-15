@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <section class="books">
+
+        {% for book in books %}
+
+            <article class="book">
+                <h1>{{ book.title }}</h1>
+                <a href="{{ path('admin_book', {'id': book.id }) }}">Voir le livre</a>
+                <a href="{{ path('admin_update_book', {'id': book.id }) }}">Modifier le livre</a>
+                <a href="{{ path('admin_delete_book', {'id': book.id }) }}">Supprimer le livre</a>
+            </article>
+
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,35 @@
+
+{%  extends 'base.html.twig' %}
+
+{% block title %}
+    Nouveau livre
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {{ form_start(form) }}
+                {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-book-title-label'}}) }}
+                {{ form_widget(form.title, {'attr': {'class': 'form-book-title-widget form-control'}}) }}
+                {{ form_errors(form.title) }}
+                <br>
+                {{ form_label(form.nbPages, 'Nombre de Pages', {'label_attr': {'class': 'form-book-nbPages-label'}}) }}
+                {{ form_widget(form.nbPages, {'attr': {'class': 'form-book-nbPages-widget form-control'}}) }}
+                {{ form_errors(form.nbPages) }}
+                <br>
+                {{ form_label(form.publishedAt, 'Publié le', {'label_attr': {'class': 'form-book-publishedAt-label'}}) }}
+                {{ form_widget(form.publishedAt, {'attr': {'class': 'form-book-publishedAt-widget form-control'}}) }}
+                {{ form_errors(form.publishedAt) }}
+                <br>
+                {{ form_label(form.author, 'Auteur', {'label_attr': {'class': 'form-book-author-label'}}) }}
+                {{ form_widget(form.author, {'attr': {'class': 'form-book-author-widget form-control'}}) }}
+                {{ form_errors(form.author) }}
+                <br>
+
+                {{ form_widget(form.submit, {'attr': {'class': 'form-book-submit-widget btn bg-success'}}) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
