@@ -1,10 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    {{ author.lastName }}
+{% endblock %}
+
 {% block main %}
-    <article>
-        <h2>{{ author.lastName }}</h2>
-        {% for book in author.books %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="author">
+                <h2>{{ author.lastName }}</h2>
+                {% for book in author.books %}
             <p>{{ book.title }}</p>
         {% endfor %}
-    </article>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

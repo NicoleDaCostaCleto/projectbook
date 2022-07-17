@@ -1,25 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    <title>"Liste books"</title>
+    <title>Liste books</title>
+{% endblock %}
+
+{% block header%}
+    {% include 'admin/_header.html.twig' %}
+<form method="GET" action="{{ path('admin_search_books') }}">
+    <input type="text" name="search">
+    <input type="submit">
+</form>
 {% endblock %}
 
 {% block main %}
-
-    <section class="books">
-
-        {% for book in books %}
-
-                <article class="book">
-                    <h1>{{ book.title }}</h1>
-                    <p>{{ book.author}}</p>
-                    <a class="btn" href="{{ path('admin_book', {'id': book.id }) }}">Voir le livre</a><br>
-                    <a class="btn" href="{{ path('admin_insert_book') }}">Ajouter un livre</a><br>
-                    <a class="btn" href="{{ path('admin_delete_book', {'id' : book.id}) }}">Supprimer</a><br>
-                    <a class="btn" href="{{ path('admin_update_book', {'id' : book.id}) }}">Modifier</a>
-                </article>
-
-        {% endfor %}
-    </section>
-
+    <h2>Liste Books</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                {% for book in books %}
+                    <div class="books">
+                            <h2>{{ book.title }}</h2>
+                            <p>Nombre de pages: {{ book.nbPages }}</p>
+                            <p>Publié le: {{ book.publishedAt | date('d-m-Y') }}</p>
+                            {% if book.author is not null %}
+                                <p>Auteur : {{ book.author.firstName }} {{ book.author.lastName }}</p>
+                            {% endif %}
+                        <a href="{{ path('admin_show_book', {'id' : book.id }) }}" class="btn">Voir book</a>
+                        <a href="{{ path('admin_insert_book') }}" class="btn">Ajouter un livre</a><br>
+                        <a href="{{ path('admin_update_book', {'id' : book.id }) }}" class="btn">Modifier le livre</a>
+                        <a href="{{ path('admin_delete_book', {'id' : book.id }) }}" class="btn">Supprimer le livre</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

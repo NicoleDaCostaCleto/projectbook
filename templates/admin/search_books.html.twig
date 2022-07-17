@@ -1,17 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <section class="books">
-
+    <section>
         {% for book in books %}
-
-            <article class="book">
                 <h1>{{ book.title }}</h1>
-                <a href="{{ path('admin_book', {'id': book.id }) }}">Voir le livre</a>
-                <a href="{{ path('admin_update_book', {'id': book.id }) }}">Modifier le livre</a>
-                <a href="{{ path('admin_delete_book', {'id': book.id }) }}">Supprimer le livre</a>
-            </article>
-
+                <a href="{{ path('admin_show_book', {'id': book.id }) }}" class="btn">Voir le livre</a>
         {% endfor %}
     </section>
 {% endblock %}

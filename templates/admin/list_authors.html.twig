@@ -1,19 +1,33 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    <title>Liste authors</title>
+{% endblock %}
+
+{% block header%}
+    {% include 'admin/_header.html.twig' %}
+{% endblock %}
+
 {% block main %}
-
-
-<section class="authors">
-    {% for author in authors %}
-        <article class="author">
-            <h2>{{author.lastName}}</h2>
-            <a class="btn" href="{{path('admin_show_author', {'id':author.id}) }}">Books</a><br>
-            <a class="btn" href="{{ path('admin_insert_author') }}">Ajouter un Author</a><br>
-            <a class="btn" href="{{ path('admin_delete_author', {'id' : author.id}) }}">Supprimer un Author</a><br>
-            <a class="btn" href="{{ path('admin_update_author', {'id' : author.id}) }}">Modifier un Author</a>
-        </article>
-    {% endfor %}
-
-
-</section>
+    <h2>Liste Authors</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                {% for author in authors %}
+                    <div class="authors">
+                        <h2>{{author.lastName}}</h2>
+                        <p> {{ author.firstName}}</p>
+                        <p>Auteur né(e) le: {{ author.birthDate | date('d-m-Y') }}</p>
+                        {% if author.deathDate is not null %}
+                            <p>Auteur mort le: {{ author.deathDate | date('d-m-Y') }}</p>
+                        {% endif %}
+                    <a class="btn" href="{{path('admin_show_author', {'id':author.id}) }}">Voir l'auteur</a>
+                    <a class="btn" href="{{ path('admin_insert_author') }}">Ajouter un Author</a><br>
+                    <a class="btn" href="{{ path('admin_update_author', {'id' : author.id}) }}">Modifier l'auteur</a>
+                    <a class="btn" href="{{ path('admin_delete_author', {'id' : author.id}) }}">Supprimer l'auteur</a>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -15,7 +15,7 @@ class AdminAuthorController extends AbstractController
 {
 
     /**
-     * @Route("admin/insert-author", name="admin_insert_author")
+     * @Route("admin/insert_author", name="admin_insert_author")
      */
     public function insertAuthor(EntityManagerInterface $entityManager, Request $request)
     {
@@ -33,13 +33,12 @@ class AdminAuthorController extends AbstractController
         // des inputs et faire les setters sur $article automatiquement
         $form->handleRequest($request);
 
-
         // si le formulaire a été posté et que les données sont valide ont insere en bdd les inputs
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($author);
             $entityManager->flush();
 
-            $this->addFlash('success','>Author enregistré');
+            $this->addFlash('success','Author enregistré');
         }
 
 
@@ -114,23 +113,4 @@ class AdminAuthorController extends AbstractController
 
     }
 
-    /**
-     * @Route("/admin/authors/search", name="admin_search_authors")
-     */
-    public function searchAuthors(Request $request, AuthorRepository $authorRepository)
-    {
-        // je récupère les valeurs du formulaire dans ma route
-        $search = $request->query->get('search');
-
-        // je vais créer une méthode dans BookRepository (searchByWord dans ce cas)
-        // qui trouve un livre en fonction d'un mot dans son titre
-        $authors = $authorRepository->searchByWord($search);
-
-        // je renvoie un fichier twig en lui passant les livres trouvé
-        // et je les affiche
-
-        return $this->render('admin/search_authors.html.twig', [
-            'authors' => $authors
-        ]);
-    }
     }

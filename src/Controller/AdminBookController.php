@@ -15,7 +15,7 @@ class AdminBookController extends AbstractController
 {
 
     /**
-     * @Route("/admin/book/{id}", name="admin_book")
+     * @Route("/admin/show_book/{id}", name="admin_show_book")
      */
     public function showBook(BookRepository $bookRepository, $id)
     {
@@ -26,26 +26,26 @@ class AdminBookController extends AbstractController
         $book = $bookRepository->find($id);
 
 
-        return $this->render('admin/show_book.html.twig', [
+        return $this->render("admin/show_book.html.twig", [
             'book' => $book
         ]);
 
     }
 
     /**
-     * @Route("/admin/books", name="admin_books")
+     * @Route("/admin/list_books", name="admin_list_books")
      */
-    public function listeBooks(BookRepository $bookRepository)
+    public function listBooks(BookRepository $bookRepository)
     {
         $books = $bookRepository->findAll();
 
-        return $this->render('admin/list_books.html.twig', [
+        return $this->render("admin/list_books.html.twig", [
             'books' => $books
         ]);
     }
 
     /**
-     * @Route("/admin/insert-book", name="admin_insert_book")
+     * @Route("admin/insert_book", name="admin_insert_book")
      */
     public function insertBook(EntityManagerInterface $entityManager, Request $request)
     {
@@ -100,7 +100,7 @@ class AdminBookController extends AbstractController
 
         }
 
-        return $this->redirectToRoute('admin_books');
+        return $this->redirectToRoute('admin_list_books');
     }
 
 
@@ -109,8 +109,7 @@ class AdminBookController extends AbstractController
      */
     public function updateBook($id, BookRepository $bookRepository, EntityManagerInterface $entityManager, Request $request)
     {
-        $book = new Book();
-        $book->setPublishedAt(new \DateTime('NOW'));
+        $book = $bookRepository->find($id);
 
         // j'ai utilisé en ligne de commandes "php bin/console make:form"
 
@@ -122,11 +121,8 @@ class AdminBookController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($book);
             $entityManager->flush();
-
-            $this->addFlash('success','Livre enregistré');
+            $this->addFlash('success', 'Vous avez bien modifié votre livre');
         }
-
-
 
         // j'affiche mon twig, en lui passant une variable form
         return $this->render("admin/insert_book.html.twig", [
