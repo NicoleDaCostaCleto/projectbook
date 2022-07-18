@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
 class Author
@@ -92,20 +93,22 @@ class Author
         return $this;
     }
 
-    // /**
-    // * Valid if the end date if not set or if it is greater than the start date.
-    // * If the second test, we are sure both fields are DateTime objects.
-    // *
-    // * @param array<string,mixed> $data
-    // */
-    //public function validate(array $data, ExecutionContextInterface $context): void
-    //{
-    //    if (($data['end_date'] instanceof \DateTime) && $data['start_date'] > $data['end_date']) {
-    //        $context->buildViolation('The end date must be greater than the start date.')
-    //            ->atPath('end_date')
-    //            ->addViolation();
-    //    }
-    //}
+    /**
+    * Valid if the end date if not set or if it is greater than the start date.
+   * If the second test, we are sure both fields are DateTime objects.
+    *
+     * @Assert\Callback
+    *
+    */
+    public function validate(ExecutionContextInterface $context, $payload): void
+    {
+        if ($this->getBirthDate() > $this->getDeathDate()) {
+            $context->buildViolation('The end date must be greater than the start date.')
+                ->atPath('deathDate')
+                ->addViolation();
+        }
+    }
+
 
     /**
      * @return Collection<int, Book>

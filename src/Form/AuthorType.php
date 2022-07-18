@@ -20,7 +20,6 @@ class AuthorType extends AbstractType
             ->add('deathDate', null, ['widget' => 'single_text', 'required' => false, 'empty_data' => '',
             ])
             ->add('submit', SubmitType::class);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
