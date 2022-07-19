@@ -11,7 +11,8 @@
                 <div class="book">
                     <h2>{{ book.title }}</h2>
                     <p>Nombre de pages : {{ book.nbPages }}</p>
-                    <p>Publié le : {{ book.publishedAt | date('d-m-y') }}</p>
+                    <img src="{{ asset('uploads/images/' ~ book.image) }}" height="200vh">
+                    <p>Publié le : {{ book.publishedAt | date('d-m-Y') }}</p>
                     {% if book.author is not null %}
                         auteur :<a href="{{ path('admin_show_author', {'id' : book.author.id}) }}">{{ book.author.firstName }} {{ book.author.lastName }}</a>
                     {% endif %}

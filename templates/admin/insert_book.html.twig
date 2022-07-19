@@ -12,6 +12,7 @@
                 {{ form_start(form) }}
                 {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-book-title-label'}}) }}
                 {{ form_widget(form.title, {'attr': {'class': 'form-book-title-widget form-control'}}) }}
+                {#erreurs que symfony peut decteter comme par exemple taille fichier#}
                 {{ form_errors(form.title) }}
                 <br>
                 {{ form_label(form.nbPages, 'Nombre de Pages', {'label_attr': {'class': 'form-book-nbPages-label'}}) }}

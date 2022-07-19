@@ -10,10 +10,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdminBookController extends AbstractController
 {
-
+// $id partie variable de l'url, ma wildcard
+// j'utilise Doctrine pour avoir la possibilité d'utiliser le get avec BookRepository et $bookRepository pour l'instance de classe
     /**
      * @Route("/admin/show_book/{id}", name="admin_show_book")
      */
@@ -27,6 +29,7 @@ class AdminBookController extends AbstractController
 
 
         return $this->render("admin/show_book.html.twig", [
+            //on affecte à la variable twig la valeur php
             'book' => $book
         ]);
 
@@ -44,10 +47,12 @@ class AdminBookController extends AbstractController
         ]);
     }
 
+    //EntityManager me permet d'enregistre dans la bdd un element
+    // request me permet de recuperer
     /**
      * @Route("admin/insert_book", name="admin_insert_book")
      */
-    public function insertBook(EntityManagerInterface $entityManager, Request $request)
+    public function insertBook(EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger)
     {
         $book = new Book();
 
@@ -65,6 +70,23 @@ class AdminBookController extends AbstractController
         // si l'input est valide on l'insère dans la bdd
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image =$form->get('image')->getData();
+            //je recupere l'image dans le formulaire (l'image est en mapped false donc c'est à moi de gerer l'upload
+            $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+            // this is needed to safely include the file name as part of the URL
+            // je recupere le nom du fichier original
+            //j'utilise un instance de la classe skugger et sa methode slug pour supprimer les caracteres speciaux,
+            // espaces etc du nom de fichier
+            $safeFilename = $slugger->slug($originalFilename);
+            // function php uniqid qui ajoute au nom de l'image un identifiant unique à l'image
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+            $image->move(
+                $this->getParameter('images_directory'),
+                $newFilename
+            );
+            $book->setImage($newFilename);
+
             $entityManager->persist($book);
             $entityManager->flush();
 
@@ -107,18 +129,36 @@ class AdminBookController extends AbstractController
     /**
      * @Route("/admin/books/update/{id}", name="admin_update_book")
      */
-    public function updateBook($id, BookRepository $bookRepository, EntityManagerInterface $entityManager, Request $request)
+    public function updateBook($id, BookRepository $bookRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger)
     {
         $book = $bookRepository->find($id);
 
         // j'ai utilisé en ligne de commandes "php bin/console make:form"
-
+        // $book est l'istance de classe qui sera utilisé sur le gavarit BookType
         $form = $this->createForm(BookType::class,$book);
 
+        // $form il va contenir les données envoyés par l'utilisateur comme request et l'instance
         $form->handleRequest($request);
 
         // si le formulaire a été posté et que les données sont valide ont insere en bdd les inputs
         if ($form->isSubmitted() && $form->isValid()) {
+            $image =$form->get('image')->getData();
+            //je recupere l'image dans le formulaire (l'image est en mapped false donc c'est à moi de gerer l'upload
+            $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+            // this is needed to safely include the file name as part of the URL
+            // je recupere le nom du fichier original
+            //j'utilise un instance de la classe skugger et sa methode slug pour supprimer les caracteres speciaux,
+            // espaces etc du nom de fichier
+            $safeFilename = $slugger->slug($originalFilename);
+            // function php uniqid qui ajoute au nom de l'image un identifiant unique à l'image
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+            $image->move(
+                $this->getParameter('images_directory'),
+                $newFilename
+            );
+            $book->setImage($newFilename);
+
             $entityManager->persist($book);
             $entityManager->flush();
             $this->addFlash('success', 'Vous avez bien modifié votre livre');
