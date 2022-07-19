@@ -1,73 +1,78 @@
 * {
-    margin: 0;
+  margin: 0;
 }
 
 h1 {
-    font-size: 2em;
-    text-shadow: 1px 1px 2px darkslategray;
+  font-size: 2em;
+  text-shadow: 1px 1px 2px darkslategray;
 }
 
 h2 {
-    margin: 2rem 0;
+  margin: 2rem 0;
 }
 
 body {
-    background-color: black;
-    color: white;
-    text-align: center;
+  background-color: black;
+  color: white;
+  text-align: center;
 }
 
 .main-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style:none;
-    background-color: black;
-    height: 60px;
-    padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  background-color: black;
+  height: 60px;
+  padding-top: 10px;
 }
+
 .main-menu ul {
-    display:flex;
-    list-style:none;
-    font-size: 20px;
-    font-weight: bolder;
-    color: white;
+  display: flex;
+  list-style: none;
+  font-size: 20px;
+  font-weight: bolder;
+  color: white;
 }
+
 .main-menu li {
-    padding-left: 30px;
-    padding-right: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 #img-container {
-    background-image: url("img/librairie.jpg");
-    background-position: center;
-    color:white;
-    font-size: 1.5rem;
-    text-align: center;
-    height: 400px;
-    position:relative;
+  background-image: url("img/librairie.jpg");
+  background-position: center;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  height: 400px;
+  position: relative;
 }
-#img-container img{
-    position:relative;
-    height: 200px;
-    padding-top: 50px;
+
+#img-container img {
+  position: relative;
+  height: 200px;
+  padding-top: 50px;
 }
 
 .btn {
-    background-color: orange;
-    color:white;
-    text-decoration: none;
-    height: 40px;
-    width: 150px;
-    padding: 5px 4px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-}
-footer {
-    background-color: black;
-    color:white;
-    text-align: center;
-    height: 50px;
-    padding-top: 20px;
+  background-color: orange;
+  color: white;
+  text-decoration: none;
+  height: 40px;
+  width: 150px;
+  padding: 5px 4px;
+  margin-bottom: 5px;
+  border-radius: 5px;
 }
 
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  height: 50px;
+  padding-top: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */
