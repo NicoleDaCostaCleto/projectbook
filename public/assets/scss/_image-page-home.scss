@@ -1,0 +1,14 @@
+#img-container {
+  background-image: url("../css/img/librairie.jpg");
+  background-position: center;
+  color:$color-primary;
+  font-size: 1.5rem;
+  text-align: center;
+  height: 400px;
+  position:relative;
+}
+#img-container img{
+  position:relative;
+  height: 200px;
+  padding-top: 50px;
+}

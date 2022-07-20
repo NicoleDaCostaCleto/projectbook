@@ -1,0 +1,20 @@
+.main-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style:none;
+  background-color: black;
+  height: 60px;
+  padding-top: 10px;
+}
+.main-menu ul {
+  display:flex;
+  list-style:none;
+  font-size: 20px;
+  font-weight: bolder;
+  color: $color-primary;
+}
+.main-menu li {
+  padding-left: 30px;
+  padding-right: 30px;
+}
