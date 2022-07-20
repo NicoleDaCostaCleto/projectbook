@@ -1,4 +1,4 @@
-{% extends 'admin/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}
     <title>Liste books</title>
@@ -6,12 +6,11 @@
 
 {% block header%}
     <header class="main-menu">
-    <ul class="nav-items">
-        <li class="nav-item"><a class="nav-link" href="{{ path('admin_list_books') }}">Books</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('admin_list_authors') }}">Authors</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
-    </ul>
+        <ul class="nav-items">
+            <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('list_books') }}">Books</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('list_authors') }}">Authors</a></li>
+        </ul>
     </header>
 <form method="GET" action="{{ path('admin_search_books') }}">
     <input type="text" name="search">
@@ -34,10 +33,7 @@
                         {% if book.author is not null %}
                                 <p>Auteur : {{ book.author.firstName }} {{ book.author.lastName }}</p>
                             {% endif %}
-                        <a href="{{ path('admin_show_book', {'id' : book.id }) }}" class="btn">Voir book</a>
-                        <a href="{{ path('admin_insert_book') }}" class="btn">Ajouter un livre</a><br>
-                        <a href="{{ path('admin_update_book', {'id' : book.id }) }}" class="btn">Modifier le livre</a>
-                        <a href="{{ path('admin_delete_book', {'id' : book.id }) }}" class="btn">Supprimer le livre</a>
+                        <a href="{{ path('show_book', {'id' : book.id }) }}" class="btn">Voir book</a>
                     </div>
                 {% endfor %}
             </div>

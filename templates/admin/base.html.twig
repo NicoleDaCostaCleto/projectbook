@@ -17,10 +17,12 @@
 
 {% block header %}
     <header class="main-menu">
+        <p>Bonjour {{ app.user.email }}</p>
         <ul class="nav-items">
-            <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('list_books') }}">Books</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('list_authors') }}">Authors</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('admin_list_books') }}">Books</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('admin_list_authors') }}">Authors</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
         </ul>
     </header>
 {% endblock %}

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use function PHPUnit\Framework\isFalse;
 
 
 class AdminBookController extends AbstractController
@@ -144,21 +145,25 @@ class AdminBookController extends AbstractController
         // si le formulaire a été posté et que les données sont valide ont insere en bdd les inputs
         if ($form->isSubmitted() && $form->isValid()) {
             $image =$form->get('image')->getData();
-            //je recupere l'image dans le formulaire (l'image est en mapped false donc c'est à moi de gerer l'upload
-            $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-            // this is needed to safely include the file name as part of the URL
-            // je recupere le nom du fichier original
-            //j'utilise un instance de la classe skugger et sa methode slug pour supprimer les caracteres speciaux,
-            // espaces etc du nom de fichier
-            $safeFilename = $slugger->slug($originalFilename);
-            // function php uniqid qui ajoute au nom de l'image un identifiant unique à l'image
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
 
-            $image->move(
-                $this->getParameter('images_directory'),
-                $newFilename
-            );
-            $book->setImage($newFilename);
+            if ($image) {
+                //je recupere l'image dans le formulaire (l'image est en mapped false donc c'est à moi de gerer l'upload
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                // je recupere le nom du fichier original
+                //j'utilise un instance de la classe skugger et sa methode slug pour supprimer les caracteres speciaux,
+                // espaces etc du nom de fichier
+                $safeFilename = $slugger->slug($originalFilename);
+                // function php uniqid qui ajoute au nom de l'image un identifiant unique à l'image
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+                $book->setImage($newFilename);
+            }
+
 
             $entityManager->persist($book);
             $entityManager->flush();
@@ -167,7 +172,8 @@ class AdminBookController extends AbstractController
 
         // j'affiche mon twig, en lui passant une variable form
         return $this->render("admin/insert_book.html.twig", [
-            'form'=> $form->createView()
+            'form'=> $form->createView(),
+            'book' => $book
         ]);
 
     }

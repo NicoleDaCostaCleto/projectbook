@@ -22,7 +22,8 @@ class BookType extends AbstractType
             ->add('author', EntityType::class,['class' => Author::class,'choice_label' => 'lastName', 'placeholder'=> ''])
             ->add('publishedAt', DateType::class, ['widget' => 'single_text',])
             ->add('image', FileType::class,[
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ])
             ->add('submit', SubmitType::class);
         ;

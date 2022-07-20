@@ -1,4 +1,8 @@
-{% extends 'admin/base.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    <title>{{ book.title }}</title>
+{% endblock %}
 
 {% block main %}
     <div class="container">
@@ -7,10 +11,10 @@
                 <div class="book">
                     <h2>{{ book.title }}</h2>
                     <p>Nombre de pages : {{ book.nbPages }}</p>
-                    <img src="{{ asset('uploads/images/') }}{{ book.image }}" alt="" height="200vh">
+                    <img src="{{ asset('uploads/images/' ~ book.image) }}" alt="" height="200vh">
                     <p>Publié le : {{ book.publishedAt | date('d-m-Y') }}</p>
                     {% if book.author is not null %}
-                        auteur :<a href="{{ path('admin_show_author', {'id' : book.author.id}) }}">{{ book.author.firstName }} {{ book.author.lastName }}</a>
+                        auteur :<a href="{{ path('show_author', {'id' : book.author.id}) }}">{{ book.author.firstName }} {{ book.author.lastName }}</a>
                     {% endif %}
                 </div>
             </div>
