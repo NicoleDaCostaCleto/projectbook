@@ -1,0 +1,16 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block main %}
+    <section>
+        {% for admin in admins %}
+            <article>
+                <h2>{{ admin.email }}</h2>
+                <div>
+                    {% for role in admin.roles %}
+                        <span>{{ role }} | </span>
+                    {% endfor %}
+                </div>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}

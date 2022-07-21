@@ -26,7 +26,6 @@ class BookType extends AbstractType
                 'required' => false
             ])
             ->add('submit', SubmitType::class);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
