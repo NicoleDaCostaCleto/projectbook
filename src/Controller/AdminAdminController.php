@@ -60,4 +60,28 @@ class AdminAdminController extends AbstractController
 
     }
 
+    /**
+     * @Route("/admin/delete/{id}", name="admin_delete_admin")
+     */
+    public function deleteAdmin($id, UserRepository $userRepository, EntityManagerInterface $entityManager)
+    {
+        // je récupère l'user en fonction de l'id dans l'url
+        $user = $userRepository->find($id);
+
+        // je vérifie que la variable $user ne contient
+        // pas null, donc que la stone existe en bdd
+        if (!is_null($user)) {
+            // j'utilise l'entity manager pour supprimer l'user
+            $entityManager->remove($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Vous avez supprimé l\'user');
+        } else {
+            $this->addFlash('error', 'User pas trouvé');
+
+        }
+
+        return $this->redirectToRoute("admin_list_admins");
+    }
+
 }
