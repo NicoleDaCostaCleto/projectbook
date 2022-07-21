@@ -9,7 +9,7 @@
                     {% for role in admin.roles %}
                         <span>{{ role }} | </span>
                     {% endfor %}
-                    <a href="{{ path('admin_delete_admin', {'id' : admin.id }) }}" class="btn">Supprimer l\'admin</a>
+                    <a href="{{ path('admin_delete_admin', {'id' : admin.id }) }}" class="btn">Supprimer l'admin</a>
                 </div>
             </article>
         {% endfor %}

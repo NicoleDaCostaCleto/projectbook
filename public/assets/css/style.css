@@ -12,14 +12,14 @@ h2 {
 }
 
 body {
-  background-color: black;
-  color: white;
+  background-color: yellow;
+  color: violet;
   text-align: center;
 }
 
 .btn {
   background-color: orange;
-  color: white;
+  color: violet;
   text-decoration: none;
   height: 40px;
   width: 150px;
@@ -43,7 +43,7 @@ body {
   list-style: none;
   font-size: 20px;
   font-weight: bolder;
-  color: white;
+  color: violet;
 }
 
 .main-menu li {
@@ -51,10 +51,18 @@ body {
   padding-right: 30px;
 }
 
+.night-activated {
+  background-color: black;
+}
+
+.night-activated .main-menu ul {
+  color: yellow;
+}
+
 #img-container {
   background-image: url("../css/img/librairie.jpg");
   background-position: center;
-  color: white;
+  color: violet;
   font-size: 1.5rem;
   text-align: center;
   height: 400px;
@@ -69,7 +77,7 @@ body {
 
 footer {
   background-color: black;
-  color: white;
+  color: violet;
   text-align: center;
   height: 50px;
   padding-top: 20px;
