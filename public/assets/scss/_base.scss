@@ -12,7 +12,30 @@ h2 {
 }
 
 body {
-  background-color: yellow;
-  color: $color-primary;
+  background-color: $color-primary;
+  color: $color-text;
   text-align: center;
 }
+
+
+.night-activated {
+  background-color: black;
+}
+
+.night-activated .main-menu ul{
+  color: white;
+  background-color: black;
+}
+
+.night-activated h1 {
+  color:white;
+}
+
+.night-activated h2 {
+  color:white;
+}
+
+.night-activated footer {
+  color:white;
+}
+
